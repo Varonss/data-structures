@@ -1,23 +1,28 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
-
-  // your code here
-  newTree.children = null;  // fix me
-
+  newTree.children = [];
+  newTree.addChild = function(value) {
+    var newChild = Tree(value);
+    newTree.children.push(newChild);
+  };
+  newTree.contains = function(target) {
+    if (newTree.value === target) {
+      return true;
+    }
+    if (newTree.children.length) {
+      for (var i = 0; i < newTree.children.length; i++) {
+        if (newTree.children[i].contains(target)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
   return newTree;
 };
 
-var treeMethods = {};
-
-treeMethods.addChild = function(value) {
-};
-
-treeMethods.contains = function(target) {
-};
-
-
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */
+var tree = Tree(0);
+tree.addChild(1);
+tree.addChild(2);
+tree.contains(2);
